@@ -1,0 +1,13 @@
+[
+    {
+        "nroOfLote" : 1,
+        "status": "wait for confirm",
+        "images": ["url1", "url2", "url2"],
+        "dateInitial": "16/03/2023",
+        "amount": 22,
+        "serial": "jghkjh3k", 
+        "delivered": "22/03/2023",
+        "actaDeSalida": "sdjkhsd66",
+        "deliveredTo": "Juanito Perez" 
+    }
+]
