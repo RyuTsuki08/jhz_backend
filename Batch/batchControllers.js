@@ -50,11 +50,71 @@ const crearBatch = async (req, res) => {
             deliveredTo: req.body. deliveredTo
         };
 
-        const resServices = res.send(await batchServices.createBatch(newBatch));
+        res.send(await batchServices.createBatch(newBatch));
     } catch(err){
         console.log(err);
         res.status(500).send(err);
     };
+};
+
+const actualizarBatch = async (req, res) => {
+  try{
+    const id = req.params.id;
+//  const imagesUpdated = []; 
+//  const lastImagesUpdated = [];
+    const newImages = req.files;
+    const lastImages = req.body.images;
+
+    const newBatchUpdate =  {
+      nroOfBatch : req.body.nroOfBatch,
+      status: req.body.status,
+      images: lastImages,
+      dateInitial: req.body.dateInitial,
+      amount: req.body.amount,
+      serial: req.body.serial, 
+      delivered: req.body.delivered,
+      actaDeSalida: req.body.actaDeSalida,
+      deliveredTo: req.body. deliveredTo
+  };
+
+    res.send(await batchServices.updateBatch(id, newBatchUpdate));
+    return "Lote actualizado correctamente";
+  } catch(err){
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+const deleteBatches = async (req, res) => {
+  try {
+    const id = req.params.id;
+    res.send(await batchServices.deleteBatch(id));
+    return "Lote eliminado correctamente";
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+const getAllBatchs = async (req, res) => {
+  try {
+    const batches = res.send(await batchServices.readBatches());
+    return batches;
+  } catch (err) {
+    console.log(err);
+    res.status(500).send(err);
+  }
+};
+
+const getBatch = async (req, res) => {
+    try {
+      const id = req.params.id;
+      const batch = res.send(await batchServices.findBatchById(id));
+      return batch;
+    } catch (err) {
+      console.log(err);
+      res.status(500).send(err);
+    }
 };
 
 
@@ -63,4 +123,4 @@ const crearBatch = async (req, res) => {
 
 
 
-module.exports = { upload,  crearBatch };
+module.exports = { upload,  crearBatch, getAllBatchs, getBatch, deleteBatches, actualizarBatch };

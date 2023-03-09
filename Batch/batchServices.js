@@ -55,6 +55,15 @@ const findBatchById = async (batchId) => {
     };
 };
 
+const readBatches = async () => {
+    try {
+        const batches = Batch.find();
+        return batches;
+    } catch (error) {
+        return error;
+    }
+};
 
 
-module.exports = { createBatch };
+
+module.exports = { createBatch, updateBatch, deleteBatch, findBatchById, readBatches };
